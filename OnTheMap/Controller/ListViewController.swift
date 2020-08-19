@@ -20,7 +20,7 @@ class ListViewController: UITableViewController {
         self.view.addSubview(indicator)
         indicator.bringSubviewToFront(self.view)
         indicator.center = self.view.center
-        showActivityIndicator()
+        handleActivityIndicator(isRunning: true)
         super.viewDidLoad()
     }
     
@@ -32,11 +32,11 @@ class ListViewController: UITableViewController {
     // MARK: - Log Out
     
     @IBAction func logout(_ sender: UIBarButtonItem) {
-        showActivityIndicator()
+        handleActivityIndicator(isRunning: true)
         UdacityClient.logout {
             DispatchQueue.main.async {
                 self.dismiss(animated: true, completion: nil)
-                self.hideActivityIndicator()
+                self.handleActivityIndicator(isRunning: false)
             }
         }
     }
@@ -49,12 +49,12 @@ class ListViewController: UITableViewController {
     // MARK: - Get Student List
     
     func getStudentsList() {
-        showActivityIndicator()
+        handleActivityIndicator(isRunning: true)
         UdacityClient.getStudentLocations() {students, error in
             self.students = students ?? []
             DispatchQueue.main.async {
                 self.tableView.reloadData()
-                self.hideActivityIndicator()
+                self.handleActivityIndicator(isRunning: false)
             }
         }
     }
@@ -84,14 +84,19 @@ class ListViewController: UITableViewController {
     
     // MARK: - Manage the Indicator
     
-    func showActivityIndicator() {
-        indicator.isHidden = false
-        indicator.startAnimating()
+    func handleActivityIndicator(isRunning: Bool) {
+        isRunning ? indicator.startAnimating() : indicator.stopAnimating()
+        indicator.isHidden = isRunning
     }
     
-    func hideActivityIndicator() {
-        indicator.stopAnimating()
-        indicator.isHidden = true
-    }
+//    func showActivityIndicator() {
+//        indicator.isHidden = false
+//        indicator.startAnimating()
+//    }
+//
+//    func hideActivityIndicator() {
+//        indicator.stopAnimating()
+//        indicator.isHidden = true
+//    }
     
 }

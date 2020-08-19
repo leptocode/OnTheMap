@@ -76,7 +76,15 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func login(_ sender: UIButton) {
         setLoggingIn(true)
-        UdacityClient.login(email: self.emailField.text ?? "", password: self.passwordField.text ?? "", completion: handleLoginResponse(success:error:))
+        
+        UdacityClient.login(email: self.emailField.text ?? "",
+                            password: self.passwordField.text ?? "") { (false, error) in
+            
+                                if let error = error {
+                                    ErrorHelpers.showSimpleAlert(viewController: self,
+                                                                 title: "Failed to Login", message: error as! String)
+                                }
+        }
     }
     
     // MARK: Sign Up
@@ -95,7 +103,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 self.performSegue(withIdentifier: "login", sender: nil)
             }
         } else {
-            showAlert(message: "Please enter valid credentials.", title: "Login Error")
+            showAlert(message: error?.localizedDescription ?? "", title: "Login Error")
         }
     }
     

@@ -21,10 +21,6 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     // MARK: Life Cycle
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         getStudentsPins()
@@ -33,7 +29,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     // MARK: Logout
     
     @IBAction func logout(_ sender: UIBarButtonItem) {
-        self.activityIndicator.startAnimating()
+        activityIndicator.startAnimating()
         UdacityClient.logout {
             DispatchQueue.main.async {
                 self.dismiss(animated: true, completion: nil)
@@ -42,41 +38,51 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         }
     }
     
-    // MARK: Refresh map
+    // MARK: - Refresh map
     
     @IBAction func refreshMap(_ sender: UIBarButtonItem) {
         getStudentsPins()
     }
     
-    // MARK: Add map annotations
+    // MARK: - Add map annotations
     
     func getStudentsPins() {
-        self.activityIndicator.startAnimating()
+        activityIndicator.startAnimating()
         UdacityClient.getStudentLocations() { locations, error in
-            self.mapView.removeAnnotations(self.annotations)
-            self.annotations.removeAll()
-            self.locations = locations ?? []
-            for dictionary in locations ?? [] {
-                let lat = CLLocationDegrees(dictionary.latitude ?? 0.0)
-                let long = CLLocationDegrees(dictionary.longitude ?? 0.0)
-                let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
-                let first = dictionary.firstName
-                let last = dictionary.lastName
-                let mediaURL = dictionary.mediaURL
-                let annotation = MKPointAnnotation()
-                annotation.coordinate = coordinate
-                annotation.title = "\(first) \(last)"
-                annotation.subtitle = mediaURL
-                self.annotations.append(annotation)
+            
+            if let error = error {
+                ErrorHelpers.showSimpleAlert(
+                    viewController: self, title: "Failed to Get Locations", message: error as! String)
             }
-            DispatchQueue.main.async {
-                self.mapView.addAnnotations(self.annotations)
-                self.activityIndicator.stopAnimating()
+            
+            else {
+                  self.mapView.removeAnnotations(self.annotations)
+                  self.annotations.removeAll()
+                  self.locations = locations ?? []
+            
+                  for dictionary in locations ?? [] {
+                      let lat = CLLocationDegrees(dictionary.latitude ?? 0.0)
+                      let long = CLLocationDegrees(dictionary.longitude ?? 0.0)
+                      let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
+                      let first = dictionary.firstName
+                      let last = dictionary.lastName
+                      let mediaURL = dictionary.mediaURL
+                      let annotation = MKPointAnnotation()
+                      annotation.coordinate = coordinate
+                      annotation.title = "\(first) \(last)"
+                      annotation.subtitle = mediaURL
+                      self.annotations.append(annotation)
+                  }
+                
+                  DispatchQueue.main.async {
+                     self.mapView.addAnnotations(self.annotations)
+                     self.activityIndicator.stopAnimating()
+                  }
             }
         }
     }
     
-    // MARK: Map view data source
+    // MARK: - Map view data source
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         let reuseId = "pin"
@@ -102,4 +108,3 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     }
     
 }
-

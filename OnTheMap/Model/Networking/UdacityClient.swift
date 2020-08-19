@@ -56,7 +56,7 @@ class UdacityClient: NSObject {
     override init() {
         super.init()
     }
- 
+
     class func shared() -> UdacityClient {
         struct Singleton {
             static var shared = UdacityClient()
@@ -79,7 +79,7 @@ class UdacityClient: NSObject {
                 })
                 completion(true, nil)
             } else {
-                completion(false, nil)
+                completion(false, error)
             }
         }
     }

@@ -29,6 +29,7 @@
 		04E67D702246B60B007445DC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04E67D6E2246B60B007445DC /* LaunchScreen.storyboard */; };
 		04E67D782246B706007445DC /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E67D772246B706007445DC /* LoginViewController.swift */; };
 		CC58DB0F24E4980D0053CD65 /* Map.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = CC58DB0E24E4980D0053CD65 /* Map.mp4 */; };
+		CC5908CD24ED70E800842021 /* ErrorHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC5908CC24ED70E800842021 /* ErrorHelpers.swift */; };
 		CCC0AE3C24E5AC0E0092365A /* Crowd.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = CCC0AE3B24E5AC0E0092365A /* Crowd.mp4 */; };
 /* End PBXBuildFile section */
 
@@ -57,6 +58,7 @@
 		04E67D712246B60B007445DC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		04E67D772246B706007445DC /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		CC58DB0E24E4980D0053CD65 /* Map.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Map.mp4; sourceTree = "<group>"; };
+		CC5908CC24ED70E800842021 /* ErrorHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorHelpers.swift; sourceTree = "<group>"; };
 		CCC0AE3B24E5AC0E0092365A /* Crowd.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Crowd.mp4; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -148,6 +150,7 @@
 			isa = PBXGroup;
 			children = (
 				04B02D24224FF78E0014CF61 /* APIHeaders.swift */,
+				CC5908CC24ED70E800842021 /* ErrorHelpers.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -249,6 +252,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				04B02D2B22512A6B0014CF61 /* StudentLocation.swift in Sources */,
+				CC5908CD24ED70E800842021 /* ErrorHelpers.swift in Sources */,
 				04E67D782246B706007445DC /* LoginViewController.swift in Sources */,
 				04B57EE222682ADC00DF092C /* UpdateLocation.swift in Sources */,
 				041497FE2263B80C004CB725 /* Location.swift in Sources */,
