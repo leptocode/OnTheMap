@@ -11,7 +11,7 @@ import UIKit
 
 enum ErrorHelpers {
     
-    private static let decodingFailedMessage = "Failed to decode server response."
+    private static let decodingFailedMessage = "No server connection"
     
     static func performDataTask<T: Decodable>(
         with request: URLRequest,

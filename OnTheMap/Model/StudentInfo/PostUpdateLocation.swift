@@ -1,5 +1,5 @@
 //
-//  UpdateLocation.swift
+//  PostLocation.swift
 //  OnTheMap
 //
 //  Created by Fabio Italiano on 8/14/20.
@@ -7,6 +7,11 @@
 //
 
 import Foundation
+
+struct PostLocation: Codable {
+    let createdAt: String?
+    let objectId: String?
+}
 
 struct UpdateLocation: Codable {
     let updatedAt: String?

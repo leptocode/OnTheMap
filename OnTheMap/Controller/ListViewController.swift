@@ -12,7 +12,7 @@ class ListViewController: UITableViewController {
     
     @IBOutlet weak var studentTableView: UITableView!
     
-    var students = [StudentInformation]()
+    var students = [StudentAttributes]()
     var indicator: UIActivityIndicatorView!
 
     override func viewDidLoad() {

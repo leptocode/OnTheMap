@@ -71,30 +71,22 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         videoPlayer.playImmediately(atRate: 0.5)
         
     }
-    
-    // MARK: Log In
-    
-    @IBAction func login(_ sender: UIButton) {
-        setLoggingIn(true)
-        
-        UdacityClient.login(email: self.emailField.text ?? "",
-                            password: self.passwordField.text ?? "") { (false, error) in
-            
-                                if let error = error {
-                                    ErrorHelpers.showSimpleAlert(viewController: self,
-                                                                 title: "Failed to Login", message: error as! String)
-                                }
-        }
-    }
-    
-    // MARK: Sign Up
+
+    // MARK: - Sign Up
     
     @IBAction func signUp(_ sender: Any) {
         setLoggingIn(true)
         UIApplication.shared.open(signUpUrl, options: [:], completionHandler: nil)
     }
+
+    // MARK: - Log In
     
-    // MARK: Handle login response
+    @IBAction func login(_ sender: UIButton) {
+        setLoggingIn(true)
+        UdacityClient.login(email: self.emailField.text ?? "", password: self.passwordField.text ?? "", completion: handleLoginResponse(success:error:))
+    }
+    
+    // MARK: - Handle login response
     
     func handleLoginResponse(success: Bool, error: Error?) {
         setLoggingIn(false)
@@ -107,7 +99,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    // MARK: Loading state
+    // MARK: - Loading state
     
     func setLoggingIn(_ loggingIn: Bool) {
         if loggingIn {
@@ -129,7 +121,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    // MARK: Enable and Disable Buttons and Text Fields
+    // MARK: - Enable and Disable Buttons and Text Fields
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if textField == emailField {
@@ -189,5 +181,3 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
     
 }
-
-

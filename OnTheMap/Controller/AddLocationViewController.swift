@@ -134,7 +134,7 @@ class AddLocationViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: Student info to display on Final Add Location screen
     
-    private func buildStudentInfo(_ coordinate: CLLocationCoordinate2D) -> StudentInformation {
+    private func buildStudentInfo(_ coordinate: CLLocationCoordinate2D) -> StudentAttributes {
         
         var studentInfo = [
             "uniqueKey": UdacityClient.Auth.key,
@@ -151,7 +151,7 @@ class AddLocationViewController: UIViewController, UITextFieldDelegate {
             print(objectId)
         }
 
-        return StudentInformation(studentInfo)
+        return StudentAttributes(studentInfo)
 
     }
     

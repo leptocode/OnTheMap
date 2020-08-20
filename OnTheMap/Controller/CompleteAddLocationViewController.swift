@@ -15,23 +15,27 @@ class CompleteAddLocationViewController: UIViewController {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var finishAddLocationButton: UIButton!
     
-    var studentInformation: StudentInformation?
+    var studentInformation: StudentAttributes?
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         if let studentLocation = studentInformation {
-            let studentLocation = Location(
+            let studentLocation = GeoLocation(
                 objectId: studentLocation.objectId ?? "",
                 uniqueKey: studentLocation.uniqueKey,
+                
                 firstName: studentLocation.firstName,
                 lastName: studentLocation.lastName,
-                mapString: studentLocation.mapString,
-                mediaURL: studentLocation.mediaURL,
+                
                 latitude: studentLocation.latitude,
                 longitude: studentLocation.longitude,
-                createdAt: studentLocation.createdOn ?? "",
-                updatedAt: studentLocation.updatedOn ?? ""
+                
+                mapString: studentLocation.mapString,
+                mediaURL: studentLocation.mediaURL,
+                
+                createdOn: studentLocation.createdOn ?? "",
+                updatedOn: studentLocation.updatedOn ?? ""
             )
             showLocations(location: studentLocation)
         }
@@ -86,7 +90,7 @@ class CompleteAddLocationViewController: UIViewController {
     
     // MARK: - New Location
     
-    private func showLocations(location: Location) {
+    private func showLocations(location: GeoLocation) {
         mapView.removeAnnotations(mapView.annotations)
         if let coordinate = extractCoordinate(location: location) {
             let annotation = MKPointAnnotation()
@@ -98,7 +102,7 @@ class CompleteAddLocationViewController: UIViewController {
         }
     }
     
-    private func extractCoordinate(location: Location) -> CLLocationCoordinate2D? {
+    private func extractCoordinate(location: GeoLocation) -> CLLocationCoordinate2D? {
         if let lat = location.latitude, let lon = location.longitude {
             return CLLocationCoordinate2DMake(lat, lon)
         }

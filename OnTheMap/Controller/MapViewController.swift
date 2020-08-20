@@ -16,7 +16,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
-    var locations = [StudentInformation]()
+    var locations = [StudentAttributes]()
     var annotations = [MKPointAnnotation]()
     
     // MARK: Life Cycle
